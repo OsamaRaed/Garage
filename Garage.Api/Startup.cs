@@ -34,6 +34,9 @@ namespace Garage.Api
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddSwaggerGen();
+
             services.AddControllersWithViews();
         }
 
@@ -55,7 +58,11 @@ namespace Garage.Api
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "CMS API");
+            });
             app.UseAuthentication();
             app.UseAuthorization();
 
