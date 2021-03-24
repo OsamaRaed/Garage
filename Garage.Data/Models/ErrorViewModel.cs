@@ -1,6 +1,6 @@
 using System;
 
-namespace Garage.Api.Models
+namespace Garage.Data.Models
 {
     public class ErrorViewModel
     {
