@@ -9,7 +9,7 @@ namespace Garage.Service.Services.CarService
 {
     public interface ICarService
     {
-        List<CarVM> Index();
+        PagingVM Index(int id);
         CarVM Details(int id);
         void Create(CreateCarDto dTO);
         void Update(UpdateCarDto dTO);

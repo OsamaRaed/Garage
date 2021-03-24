@@ -9,6 +9,13 @@ namespace Garage.Data.Models
 {
     public class UserDbEntity : IdentityUser
     {
-
+        [Required]
+        public string FirstName { get; set; }
+        [Required]
+        public string LastName { get; set; }
+        public DateTime? DOB { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
+        public bool IsDelete { get; set; }
     }
 }

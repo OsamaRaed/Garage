@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Http.Internal;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Microsoft.AspNetCore.Http;
 
 namespace Garage.Core.Dto
 {
@@ -9,7 +6,7 @@ namespace Garage.Core.Dto
     {
         public int Id { get; set; }
         public int MaintenanceReportId { get; set; }
-        public FormFile FilePath { get; set; }
+        public IFormFile FilePath { get; set; }
     }
 
 }

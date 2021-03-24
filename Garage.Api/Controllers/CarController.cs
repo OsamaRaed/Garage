@@ -19,9 +19,9 @@ namespace Garage.Controllers
         [HttpGet]
         // GET: CarController
 
-        public IActionResult Index()
+        public IActionResult Index(int page)
         {
-            var Cars = _CarService.Index();
+            var Cars = _CarService.Index(page);
             return Ok(GetRespons(Cars));
         }
         [HttpGet]

@@ -1,4 +1,7 @@
 using Garage.Api.Data;
+using Garage.Service.Services.CarService;
+using Garage.Service.Services.CustomerService;
+using Garage.Service.Services.UserService;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -31,12 +34,25 @@ namespace Garage.Api
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDatabaseDeveloperPageExceptionFilter();
-
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddIdentity<Garage.Data.Models.UserDbEntity, IdentityRole>(
+                    x =>
+                    {
+                        x.Password.RequireDigit = false;
+                        x.Password.RequiredUniqueChars = 0;
+                        x.Password.RequireUppercase = false;
+                        x.Password.RequireLowercase = false;
+                        x.Password.RequiredLength = 8;
+                    })
+                    .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddSwaggerGen();
-
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ICarService, CarService>();
+            services.AddScoped<ICustomerService, CustomerService>();
+            services.AddControllersWithViews()
+                .AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
             services.AddControllersWithViews();
         }
 
@@ -71,7 +87,6 @@ namespace Garage.Api
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
-                endpoints.MapRazorPages();
             });
         }
     }

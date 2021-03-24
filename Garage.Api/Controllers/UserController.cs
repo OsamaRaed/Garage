@@ -27,7 +27,7 @@ namespace Garage.Controllers
         [HttpGet]
         // GET: UserController/Details/5
 
-        public IActionResult Details(int id)
+        public IActionResult Details(string id)
         {
             var User = _UserService.Details(id);
             return Ok(GetRespons(User));
@@ -36,21 +36,20 @@ namespace Garage.Controllers
         // POST: UserController/Create
 
         public IActionResult Create([FromBody] CreateUserDTO dTO)
-        {
-            _UserService.Create(dTO);
-            return Ok(GetRespons());
+        { 
+              return Ok(GetRespons(_UserService.CreateAsync(dTO)));
         }
         [HttpPut]
         // Put: UserController/Update
 
         public IActionResult Update([FromBody] UpdateUserDTO dTO)
         {
-            _UserService.Update(dTO);
+            _UserService.UpdateAsync(dTO);
             return Ok(GetRespons());
         }
         // Delete: UserController/Delete/5
         [HttpDelete]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(string id)
         {
             _UserService.Delete(id);
             return Ok(GetRespons());

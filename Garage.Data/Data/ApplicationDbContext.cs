@@ -18,6 +18,7 @@ namespace Garage.Api.Data
         public DbSet<MaintenanceReportDbEntity> MaintenanceReports { get; set; }
         public DbSet<MaintenanceServiceDbEntity> MaintenanceServices { get; set; }
         public DbSet<CustomerDbEntity> Customers { get; set; }
+        public DbSet<UserDbEntity> Users { get; set; }
 
     }
 }
