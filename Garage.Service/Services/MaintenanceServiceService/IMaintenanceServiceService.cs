@@ -4,7 +4,7 @@ using System.Text;
 using Garage.Core.Dto;
 using Garage.Core.ViewModels;
 
-namespace Task3Garage.Service.Services.MaintenanceServiceService
+namespace Garage.Service.Services.MaintenanceServiceService
 {
     public interface IMaintenanceServiceService
     {

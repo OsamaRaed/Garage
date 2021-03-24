@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Task3Garage.Data;
-using Task3Garage.Core.Dto;
-using Task3Garage.Core.ViewModels;
+using Garage.Data;
+using Garage.Core.Dto;
+using Garage.Core.ViewModels;
 
-namespace Task3Garage.Service.Services.EmployeeService
+namespace Garage.Service.Services.EmployeeService
 {
     public class EmployeeService : IEmployeeService
     {

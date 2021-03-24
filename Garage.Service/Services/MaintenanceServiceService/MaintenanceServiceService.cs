@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Garage.Api.Data;
 using Garage.Core.Dto;
 using Garage.Core.ViewModels;
 using Garage.Data;

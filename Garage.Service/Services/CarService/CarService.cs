@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Task3Garage.Core.Dto;
-using Task3Garage.Core.ViewModels;
-using Task3Garage.Data;
+using Garage.Core.Dto;
+using Garage.Core.ViewModels;
+using Garage.Data;
 
-namespace Task3Garage.Service.Services.CarService
+namespace Garage.Service.Services.CarService
 {
     public class CarService : ICarService
     {

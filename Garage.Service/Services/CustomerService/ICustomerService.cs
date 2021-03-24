@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Task3Garage.Core.Dto;
-using Task3Garage.Core.ViewModels;
+using Garage.Core.Dto;
+using Garage.Core.ViewModels;
 
-namespace Task3Garage.Service.Services.CustomerService
+namespace Garage.Service.Services.CustomerService
 {
     public interface ICustomerService
     {
