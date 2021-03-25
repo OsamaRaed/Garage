@@ -19,9 +19,9 @@ namespace Garage.Controllers
         [HttpGet]
         // GET: CustomerController
 
-        public IActionResult Index()
+        public IActionResult Index(int page)
         {
-            var Customers = _CustomerService.Index();
+            var Customers = _CustomerService.Index(page);
             return Ok(GetRespons(Customers));
         }
         [HttpGet]

@@ -8,7 +8,7 @@ namespace Garage.Service.Services.CustomerService
 {
     public interface ICustomerService
     {
-        List<CustomerVM> Index();
+        PagingVM Index(int page);
         CustomerVM Details(int id);
         void Create(CreateCustomerDto Dto);
         void Update(UpdateCustomerDto Dto);

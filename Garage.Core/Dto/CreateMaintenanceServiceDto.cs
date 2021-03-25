@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -10,6 +11,6 @@ namespace Garage.Core.Dto
         public int EmployeeId { get; set; }
         public DateTime EntryDate { get; set; }
         public DateTime ExitDate { get; set; }
-        public int MaintenanceReportId { get; set; }
+        public IFormFile MaintenanceReport { get; set; }
     }
 }

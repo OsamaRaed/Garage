@@ -5,48 +5,67 @@ using Garage.Core.Dto;
 using Garage.Core.ViewModels;
 using Garage.Data;
 using Garage.Api.Data;
+using Microsoft.AspNetCore.Hosting;
+using System.Threading.Tasks;
+using System.IO;
+using Microsoft.AspNetCore.Http;
 
 namespace Garage.Service.Services.MaintenanceReportService
 {
     public class MaintenanceReportService : IMaintenanceReportService
     {
-        private readonly ApplicationDbContext _DB;
+        private readonly IWebHostEnvironment _env;
 
-        public MaintenanceReportService(ApplicationDbContext DB)
+        public MaintenanceReportService(IWebHostEnvironment env)
         {
-            _DB = DB;
+            _env = env;
         }
 
-        public List<MaintenanceReportVM> Index()
-
+        public async Task<byte[]> GetFile(string folderName, string fileName)
         {
-            return null;
-            //return _DB.MaintenanceReports.Include(x => x.Category)
-            //    .Include(x => x.Viewers).Select(x => new MaintenanceReportVM(x)).ToList();
+            var filePath = Path.Combine(_env.WebRootPath, folderName, fileName);
+            return await File.ReadAllBytesAsync(filePath);
         }
 
-        public MaintenanceReportVM Details(int id)
-
+        public async Task<string> SaveFile(IFormFile file, string folderName)
         {
-            return null;
+            string fileName = null;
+            if (file != null && file.Length > 0)
+            {
+                var uploads = Path.Combine(_env.WebRootPath, folderName);
+                fileName = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(file.FileName);
+                await using var fileStream = new FileStream(Path.Combine(uploads, fileName), FileMode.Create);
+                await file.CopyToAsync(fileStream);
+            }
 
-            //return new MaintenanceReportVM(_DB.MaintenanceReports.Include(x => x.Viewers)
-            //    .SingleOrDefault(x => x.Id == id));
+            return fileName;
         }
 
-        public void Create(CreateMaintenanceReportDto dTO)
+        public async Task<string> SaveFile(byte[] file, string folderName, string extension)
         {
+            string fileName = null;
+            if (file != null && file.Length > 0)
+            {
+                var uploads = Path.Combine(_env.WebRootPath, folderName);
+                fileName = Guid.NewGuid().ToString().Replace("-", "") + extension;
+                await File.WriteAllBytesAsync(Path.Combine(uploads, fileName), file);
+            }
 
+            return fileName;
         }
 
-        public void Update(UpdateMaintenanceReportDto dTO)
+        public async Task<string> SaveFile(string file, string folderName, string extension)
         {
+            string fileName = null;
+            if (!string.IsNullOrWhiteSpace(file))
+            {
+                var bytes = Convert.FromBase64String(file);
+                var uploads = Path.Combine(_env.WebRootPath, folderName);
+                fileName = Guid.NewGuid().ToString().Replace("-", "") + extension;
+                await File.WriteAllBytesAsync(Path.Combine(uploads, fileName), bytes);
+            }
 
-        }
-
-        public void Delete(int id)
-        {
-
+            return fileName;
         }
     }
 }

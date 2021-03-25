@@ -11,6 +11,6 @@ namespace Garage.Core.Dto
         public string Address { get; set; }
         public int Salary { get; set; }
         public DateTime EmploymentDate { get; set; }
-        public List<int> MaintenanceServices { get; set; }
+        //public List<int> MaintenanceServices { get; set; }
     }
 }

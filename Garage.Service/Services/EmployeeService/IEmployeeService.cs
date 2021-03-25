@@ -8,7 +8,7 @@ namespace Garage.Service.Services.EmployeeService
 {
     public interface IEmployeeService
     {
-        List<EmployeeVM> Index();
+        PagingVM Index(int page);
         EmployeeVM Details(int id);
         void Create(CreateEmployeeDto Dto);
         void Update(UpdateEmployeeDto Dto);

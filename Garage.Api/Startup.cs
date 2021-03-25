@@ -1,6 +1,9 @@
 using Garage.Api.Data;
 using Garage.Service.Services.CarService;
 using Garage.Service.Services.CustomerService;
+using Garage.Service.Services.EmployeeService;
+using Garage.Service.Services.MaintenanceReportService;
+using Garage.Service.Services.MaintenanceServiceService;
 using Garage.Service.Services.UserService;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -49,6 +52,9 @@ namespace Garage.Api
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ICarService, CarService>();
             services.AddScoped<ICustomerService, CustomerService>();
+            services.AddScoped<IEmployeeService, EmployeeService>();
+            services.AddScoped<IMaintenanceServiceService, MaintenanceServiceService>();
+            services.AddSingleton<IMaintenanceReportService, MaintenanceReportService>();
             services.AddControllersWithViews()
                 .AddNewtonsoftJson(options =>
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore

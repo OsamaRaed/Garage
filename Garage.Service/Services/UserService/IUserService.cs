@@ -10,7 +10,7 @@ namespace Garage.Service.Services.UserService
 {
     public interface IUserService
     {
-        List<UserVM> Index();
+        PagingVM Index(int page);
         UserVM Details(string id);
         Task<bool> CreateAsync(CreateUserDTO dTO);
         Task UpdateAsync(UpdateUserDTO dTO);

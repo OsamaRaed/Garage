@@ -6,7 +6,6 @@ namespace Garage.Core.ViewModels
 {
     public class MaintenanceReportVM
     {
-        public MaintenanceServiceVM MaintenanceService { get; set; }
         public string FilePath { get; set; }
 
     }

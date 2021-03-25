@@ -19,9 +19,9 @@ namespace Garage.Controllers
         [HttpGet]
         // GET: UserController
 
-        public IActionResult Index()
+        public IActionResult Index(int page)
         {
-            var Users = _UserService.Index();
+            var Users = _UserService.Index(page);
             return Ok(GetRespons(Users));
         }
         [HttpGet]

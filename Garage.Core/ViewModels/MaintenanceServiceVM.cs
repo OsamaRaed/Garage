@@ -9,5 +9,6 @@ namespace Garage.Core.ViewModels
         public DateTime EntryDate { get; set; }
         public DateTime ExitDate { get; set; }
         public MaintenanceReportVM MaintenanceReport { get; set; }
+        public CarVM Car { get; set; }
     }
 }

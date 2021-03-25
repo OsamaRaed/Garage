@@ -10,7 +10,7 @@ namespace Garage.Controllers
 {
     public class EmployeeController : BaseController
     {
-        private readonly IEmployeeService _EmployeeService;
+        private IEmployeeService _EmployeeService;
         public EmployeeController(IEmployeeService EmployeeService)
         {
             _EmployeeService = EmployeeService;
@@ -19,9 +19,9 @@ namespace Garage.Controllers
         [HttpGet]
         // GET: EmployeeController
 
-        public IActionResult Index()
+        public IActionResult Index(int page)
         {
-            var Employees = _EmployeeService.Index();
+            var Employees = _EmployeeService.Index(page);
             return Ok(GetRespons(Employees));
         }
         [HttpGet]

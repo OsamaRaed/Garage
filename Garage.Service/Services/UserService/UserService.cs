@@ -23,9 +23,20 @@ namespace Garage.Service.Services.UserService
             _userManager = userManager;
         }
 
-        public List<UserVM> Index()
+        public PagingVM Index(int page)
 
         {
+
+            var pages = Math.Ceiling(_DB.Users.Count() / 10.0);
+
+
+            if (page < 1 || page > pages)
+            {
+                page = 1;
+            }
+
+            var skip = (page - 1) * 10;
+
             var users = _DB.Users.Where(x => !x.IsDelete).Select(x => new UserVM()
             {
                 Id = x.Id,
@@ -36,7 +47,12 @@ namespace Garage.Service.Services.UserService
                 DOB = x.DOB
             }).ToList();
 
-            return users;
+            var pagingResult = new PagingVM();
+            pagingResult.Data = users;
+            pagingResult.NumberOfPages = (int)pages;
+            pagingResult.CureentPage = page;
+
+            return pagingResult;
 
         }
 

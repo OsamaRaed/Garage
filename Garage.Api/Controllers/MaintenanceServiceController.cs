@@ -19,9 +19,9 @@ namespace Garage.Controllers
         [HttpGet]
         // GET: MaintenanceServiceController
 
-        public IActionResult Index()
+        public IActionResult Index(int page)
         {
-            var MaintenanceServices = _MaintenanceServiceService.Index();
+            var MaintenanceServices = _MaintenanceServiceService.Index(page);
             return Ok(GetRespons(MaintenanceServices));
         }
         [HttpGet]
@@ -35,7 +35,7 @@ namespace Garage.Controllers
         [HttpPost]
         // POST: MaintenanceServiceController/Create
 
-        public IActionResult Create([FromBody] CreateMaintenanceServiceDto dTO)
+        public IActionResult Create([FromForm] CreateMaintenanceServiceDto dTO)
         {
             _MaintenanceServiceService.Create(dTO);
             return Ok(GetRespons());
@@ -43,7 +43,7 @@ namespace Garage.Controllers
         [HttpPut]
         // Put: MaintenanceServiceController/Update
 
-        public IActionResult Update([FromBody] UpdateMaintenanceServiceDto dTO)
+        public IActionResult Update([FromForm] UpdateMaintenanceServiceDto dTO)
         {
             _MaintenanceServiceService.Update(dTO);
             return Ok(GetRespons());

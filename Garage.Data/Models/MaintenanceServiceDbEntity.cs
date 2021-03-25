@@ -13,6 +13,5 @@ namespace Garage.Data.Models
         public DateTime EntryDate { get; set; }
         public DateTime ExitDate { get; set; }
         public MaintenanceReportDbEntity MaintenanceReport { get; set; }
-        public int MaintenanceReportId { get; set; }
     }
 }

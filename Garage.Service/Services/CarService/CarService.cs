@@ -31,7 +31,7 @@ namespace Garage.Service.Services.CarService
             }
 
             var skip = (page - 1) * 10;
-            var Cars =  _DB.Cars.Include(x => x.MaintenanceService)
+            var Cars =  _DB.Cars.Include(x => x.MaintenanceService).ThenInclude(c => c.MaintenanceReport)
                 .Select(x => new CarVM() 
                 { 
                     Brand = x.Brand,
@@ -41,7 +41,12 @@ namespace Garage.Service.Services.CarService
                     .Select(y => new MaintenanceServiceVM()
                     { 
                         EntryDate = y.EntryDate,
-                        ExitDate = y.ExitDate
+                        ExitDate = y.ExitDate,
+                        MaintenanceReport = new MaintenanceReportVM()
+                        {
+                            FilePath = y.MaintenanceReport.FilePath
+
+                        }
                     }).ToList()
                 }).Skip(skip).Take(10).ToList();
             var paging = new PagingVM()
@@ -72,27 +77,27 @@ namespace Garage.Service.Services.CarService
             };
         }
 
-        public void Create(CreateCarDto dTO)
+        public void Create(CreateCarDto dto)
         {
             var Car = new CarDbEntity()
             {
-                Brand = dTO.Brand,
-                Model = dTO.Model,
-                Color = dTO.Color,
-                CustomerId = dTO.CustomerId,
+                Brand = dto.Brand,
+                Model = dto.Model,
+                Color = dto.Color,
+                CustomerId = dto.CustomerId,
             };
             _DB.Cars.Add(Car);
             _DB.SaveChanges();
         }
 
-        public void Update(UpdateCarDto dTO)
+        public void Update(UpdateCarDto dto)
         {
-            var Car = _DB.Cars.SingleOrDefault(x => x.Id == dTO.Id && !x.IsDelete);
-            Car.Brand = dTO.Brand;
-            Car.Model = dTO.Model;
-            Car.Color = dTO.Color;
-            Car.CustomerId = dTO.CustomerId;
-                        _DB.Cars.Update(Car);
+            var Car = _DB.Cars.SingleOrDefault(x => x.Id == dto.Id && !x.IsDelete);
+            Car.Brand = dto.Brand;
+            Car.Model = dto.Model;
+            Car.Color = dto.Color;
+            Car.CustomerId = dto.CustomerId;
+            _DB.Cars.Update(Car);
             _DB.SaveChanges();
         }
 
