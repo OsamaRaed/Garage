@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Garage.Api.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<UserDbEntity>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -18,7 +18,7 @@ namespace Garage.Api.Data
         public DbSet<MaintenanceReportDbEntity> MaintenanceReports { get; set; }
         public DbSet<MaintenanceServiceDbEntity> MaintenanceServices { get; set; }
         public DbSet<CustomerDbEntity> Customers { get; set; }
-        public DbSet<UserDbEntity> Users { get; set; }
+        //public DbSet<UserDbEntity> Users { get; set; }
 
     }
 }
